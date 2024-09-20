@@ -1,0 +1,62 @@
+#-------------------Assignment instructions---------------#
+
+You have been assigned the task of creating a basic program to help a clinic monitor patients’ blood pressure readings. The clinic gathers multiple readings for each patient, and the program needs to analyze these readings to identify patients with high blood pressure that necessitates immediate attention.
+
+
+The clinic considers high blood pressure to be a systolic reading over 140 or a diastolic reading over 90.
+
+ 
+
+Instructions:
+
+Write a Python program that:
+
+Defines a function called check_blood_pressure that takes a list of tuples as input. Each tuple contains a patient’s name, systolic pressure, and diastolic pressure (e.g., ("John", 150, 95)).
+The function should use a loop to go through each patient’s readings and use an if statement to check if their blood pressure is high.
+If a patient has high blood pressure, print a message alerting the clinic with the patient’s name.
+If no patients have high blood pressure, print a message stating that all patients’ blood pressure is normal.
+ 
+
+
+#-----------------My response---------------------------#
+
+#-------------------
+# define a function |
+#-------------------  
+  
+def check_blood_pressure(patients):
+
+# Initialize variables to calculate the average
+    total_systolic = 0
+    total_diastolic = 0
+    num_patients = len(patients)
+
+
+    for name, systolic, diastolic in patients:
+        print(f"Name: {name}, Score 1: {systolic}, Score 2: {diastolic}")
+    
+        total_systolic += systolic
+        total_diastolic += diastolic
+    
+        if systolic >140 or diastolic>90:
+            print('Alert! Patient', name, 'may has a high blood pressure.')
+        else:
+            print('Patient', name, 'has a normal blood pressure.')
+
+    # Calculate averages
+    average_systolic = total_systolic / num_patients
+    average_diastolic = total_diastolic / num_patients
+
+    # Print average blood pressure
+    print(f"\nAverage Blood Pressure of this patient list: Systolic: {average_systolic:.2f}, Diastolic: {average_diastolic:.2f}")
+# Print average blood pressure
+print(f"\nAverage Blood Pressure of this patient list: Systolic: {average_systolic:.2f}, Diastolic: {average_diastolic:.2f}")
+
+
+#-------------------
+# try an example |
+#-------------------  
+
+patients=[("John", 150, 95), ("Alice", 120, 80), ("Bob", 135, 88)]
+
+check_blood_pressure(patients)
