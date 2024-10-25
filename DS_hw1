@@ -1,24 +1,3 @@
-#-------------------Assignment instructions---------------#
-
-You have been assigned the task of creating a basic program to help a clinic monitor patients’ blood pressure readings. The clinic gathers multiple readings for each patient, and the program needs to analyze these readings to identify patients with high blood pressure that necessitates immediate attention.
-
-
-The clinic considers high blood pressure to be a systolic reading over 140 or a diastolic reading over 90.
-
- 
-
-Instructions:
-
-Write a Python program that:
-
-Defines a function called check_blood_pressure that takes a list of tuples as input. Each tuple contains a patient’s name, systolic pressure, and diastolic pressure (e.g., ("John", 150, 95)).
-The function should use a loop to go through each patient’s readings and use an if statement to check if their blood pressure is high.
-If a patient has high blood pressure, print a message alerting the clinic with the patient’s name.
-If no patients have high blood pressure, print a message stating that all patients’ blood pressure is normal.
- 
-
-
-#-----------------My response---------------------------#
 
 #-------------------
 # define a function |
