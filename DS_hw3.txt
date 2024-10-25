@@ -1,0 +1,104 @@
+Qs1:
+#--------------------- age (I used sep30,2024 as the end day)
+
+# add a column called age 
+UPDATE hw3.person
+SET age = FLOOR(DATEDIFF(CURDATE(), DATE(CONCAT(year_of_birth, '-', month_of_birth, '-', day_of_birth))) / 365.25)
+WHERE year_of_birth IS NOT NULL;  
+
+#calculate count and percentage of each age group
+SELECT 
+    COUNT(*) AS count_in_age_group,
+    (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM hw3.person)) AS percentage_in_age_group
+FROM 
+    hw3.person
+WHERE 
+    age > 18 AND age <= 30;
+#É (run for each age category)
+
+
+#---------------------------------------- gender
+SELECT 
+    ta.gender_concept_id AS gender_id, 
+    tb.concept_name AS gender_name, 
+    COUNT(DISTINCT ta.person_id) AS ct,
+    (COUNT(DISTINCT ta.person_id) * 100.0 / (SELECT COUNT(DISTINCT person_id) FROM hw3.person)) AS percentage
+FROM 
+    hw3.person AS ta
+JOIN 
+    hw3.concept AS tb ON ta.gender_concept_id = tb.concept_id 
+GROUP BY 
+    ta.gender_concept_id, tb.concept_name
+ORDER BY 
+    ct DESC; 
+
+
+#------------------------------------------------- race
+SELECT 
+    ta.race_concept_id AS race_id, 
+    tb.concept_name AS race_name, 
+    COUNT(DISTINCT ta.person_id) AS ct,
+    (COUNT(DISTINCT ta.person_id) * 100.0 / (SELECT COUNT(DISTINCT person_id) FROM hw3.person)) AS percentage
+FROM 
+    hw3.person AS ta
+JOIN 
+    hw3.concept AS tb ON ta.race_concept_id = tb.concept_id 
+GROUP BY 
+    ta.race_concept_id, tb.concept_name
+ORDER BY 
+    ct DESC;
+
+
+#---------------------------------------------- ethnicity
+SELECT 
+    ta.ethnicity_concept_id AS ethnicity_id, 
+    tb.concept_name AS ethnicity_name, 
+    COUNT(DISTINCT ta.person_id) AS ct,
+    (COUNT(DISTINCT ta.person_id) * 100.0 / (SELECT COUNT(DISTINCT person_id) FROM hw3.person)) AS percentage
+FROM 
+    hw3.person AS ta
+JOIN 
+    hw3.concept AS tb ON ta.ethnicity_concept_id = tb.concept_id 
+GROUP BY 
+    ta.ethnicity_concept_id, tb.concept_name
+ORDER BY 
+    ct DESC;
+
+
+
+Qs2:
+SELECT 
+    de.drug_concept_id,
+    c.concept_name AS drug_name,
+    COUNT(DISTINCT de.person_id) AS number_of_patients
+FROM 
+    hw3.drug_exposure AS de
+JOIN 
+    hw3.concept AS c ON de.drug_concept_id = c.concept_id
+GROUP BY 
+    de.drug_concept_id, c.concept_name
+HAVING 
+    COUNT(DISTINCT de.person_id) >= 100
+ORDER BY 
+    number_of_patients DESC;
+
+## (output see attached)
+
+Qs3:
+SELECT 
+    co.condition_concept_id AS disease_concept_id,
+    c.concept_name AS disease_name,
+    COUNT(DISTINCT co.person_id) AS number_of_patients
+FROM 
+    hw3.condition_occurrence AS co
+JOIN 
+    hw3.concept AS c ON co.condition_concept_id = c.concept_id
+GROUP BY 
+    co.condition_concept_id, c.concept_name
+HAVING 
+    COUNT(DISTINCT co.person_id) >= 500
+ORDER BY 
+    number_of_patients DESC;
+
+## (output see attached)
+
